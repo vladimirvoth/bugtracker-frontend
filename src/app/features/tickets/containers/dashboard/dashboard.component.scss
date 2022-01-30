@@ -1,0 +1,49 @@
+@import '../../../../../styles/globals/vars.scss';
+@import '../../../../../styles/globals/breakpoints.scss';
+
+:host {
+  display: block;
+
+  .dashboard {
+    padding: 2rem;
+
+    @include breakpoint($lg) {
+      padding: 6rem 1rem;
+    }
+
+    &__headline {
+      margin: auto;
+      margin-top: 8rem;
+      width: 600px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    &__widget {
+      position: relative;
+      margin: 1rem;
+      padding: 1rem 1.5rem;
+      box-shadow: $bs-standard;
+      border-radius: $br-minimal;
+    }
+
+    &__btn {
+      display: block;
+      margin: 1.5rem auto;
+    }
+
+    &__create-ticket-btn {
+      position: fixed;
+      bottom: 64px;
+      right: 36px;
+      width: 72px;
+      height: 72px;
+      border-radius: $br-round-100;
+
+      @include breakpoint($lg) {
+        top: 16px;
+        right: 16px;
+      }
+    }
+  }
+}

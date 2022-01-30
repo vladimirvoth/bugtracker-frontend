@@ -1,0 +1,44 @@
+@import '../../../../styles/globals/vars.scss';
+
+:host {
+  display: block;
+
+  .inline-edit {
+    position: relative;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid transparent;
+    border-radius: $br-minimal;
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid $border-color;
+    }
+
+    &:hover .inline-edit__icon {
+      display: inline;
+    }
+
+    &__icon {
+      display: none;
+      position: absolute;
+      right: 8px;
+      top: 5px;
+      color: $fs-color-form;
+      font-size: 14px;
+    }
+
+    &__error {
+      position: relative;
+      left: 12px;
+      bottom: 8px;
+    }
+
+    &__select {
+      width: 250px;
+      padding: 0.5rem;
+      border-color: $border-color;
+      border-radius: $br-minimal;
+      color: $fs-color-form;
+    }
+  }
+}

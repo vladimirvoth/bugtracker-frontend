@@ -1,0 +1,37 @@
+@import '../../../../styles/globals/vars.scss';
+
+:host {
+  display: block;
+
+  .footer {
+    height: 100%;
+    padding: 12px;
+    background-color: $light-grey;
+
+    &__copyright-text {
+      display: inline;
+      margin: 0 16px;
+      font-size: $fs-text-middle;
+      color: $bg-color-primary;
+    }
+
+    &__list {
+      float: right;
+      display: inline;
+      margin-right: 8px;
+      padding-left: 0px;
+      list-style-type: none;
+    }
+
+    &__list-item {
+      display: inline;
+      margin: 0 8px;
+    }
+
+    &__list-link {
+      font-size: $fs-text-middle;
+      color: $bg-color-primary;
+      text-decoration: underline;
+    }
+  }
+}

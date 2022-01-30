@@ -1,0 +1,50 @@
+<nav class="sidebar">
+  <img class="sidebar__logo" src="/assets/svg/logo.svg" alt="Bugtracker Logo" />
+  <ul class="sidebar__list">
+    <li class="sidebar__list-item">
+      <a
+        class="sidebar__list-link"
+        routerLink="/tickets"
+        routerLinkActive="active-link"
+        ><fa-icon [icon]="faHome"></fa-icon
+      ></a>
+    </li>
+  </ul>
+  <div class="sidebar__bottom-container">
+    <ul class="sidebar__list sidebar__list-bottom">
+      <li class="sidebar__list-item">
+        <a
+          class="sidebar__list-link"
+          routerLink="/settings"
+          routerLinkActive="active-link"
+          ><fa-icon [icon]="faCog"></fa-icon
+        ></a>
+      </li>
+      <li class="sidebar__list-item">
+        <a
+          class="sidebar__list-link"
+          routerLink="/faq"
+          routerLinkActive="active-link"
+          ><fa-icon [icon]="faQuestion"></fa-icon
+        ></a>
+      </li>
+    </ul>
+    <div *ngIf="!(loading$ | async)" class="sidebar__extend" (click)="toggle()">
+      <img
+        class="sidebar__profile-picture"
+        [src]="(user$ | async).picture || '/assets/images/blank-profile.png'"
+        alt="{{ (user$ | async).username }}"
+      />
+      <div class="sidebar__extend-container" [class.open]="isOpen">
+        <span class="p-2 text-dark">Hello, {{ (user$ | async).username }}</span>
+        <hr />
+        <a
+          class="p-2 text-dark font-weight-bold sidebar__extend-link"
+          href="#"
+          (click)="logout($event)"
+          >Logout</a
+        >
+      </div>
+    </div>
+  </div>
+</nav>

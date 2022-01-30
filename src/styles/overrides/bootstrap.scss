@@ -1,0 +1,25 @@
+@import '../globals/vars.scss';
+
+.table {
+  margin-bottom: 6rem;
+}
+
+.table th,
+.table td {
+  border-top: none;
+}
+
+.ng-invalid[required].ng-dirty,
+.ng-invalid.required.ng-dirty,
+.ng-invalid[required].ng-touched,
+.ng-invalid.required.ng-touched {
+  border: 1px solid $error-color;
+}
+
+.toast-error {
+  background-color: $error-color;
+}
+
+.modal-dialog {
+  max-width: 800px;
+}

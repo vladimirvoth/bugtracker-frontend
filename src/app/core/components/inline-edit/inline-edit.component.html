@@ -1,0 +1,75 @@
+<div *ngIf="!editMode" (click)="editMode = true" class="inline-edit">
+  <ng-container [ngSwitch]="type">
+    <markdown
+      *ngSwitchCase="'editor'"
+      [data]="control.value"
+      class="inline-edit__markdown"
+    ></markdown>
+    <ng-container *ngSwitchCase="'select'">
+      <ng-container *ngIf="selectItems">
+        {{ control.value | selectValue: selectItems }}
+      </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchDefault>{{ control.value }}</ng-container>
+  </ng-container>
+  <fa-icon class="inline-edit__icon" [icon]="faPencilAlt"></fa-icon>
+</div>
+
+<ng-container *ngIf="editMode" [ngSwitch]="type">
+  <ng-container *ngSwitchCase="'editor'">
+    <textarea
+      [formControl]="control"
+      (focusout)="onFocusOut()"
+      appAutoFocus
+      ngDefaultControl
+      rows="10"
+      placeholder="Write something... You can use markdown ;)"
+    ></textarea>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'select'">
+    <select
+      class="form-select inline-edit__select"
+      [formControl]="control"
+      (focusout)="onFocusOut()"
+      (keydown.enter)="$event.target.blur()"
+      appAutoFocus
+    >
+      <option *ngFor="let item of selectItems" [value]="item.key">
+        {{ item.value }}
+      </option>
+    </select>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <input
+      type="text"
+      [formControl]="control"
+      (focusout)="onFocusOut()"
+      (keydown.enter)="$event.target.blur()"
+      class="form-control"
+      appAutoFocus
+    />
+  </ng-container>
+</ng-container>
+
+<span
+  class="error-feedback inline-edit__error"
+  *ngIf="control.hasError('required') && control.touched"
+>
+  This field is required!
+</span>
+<span
+  class="error-feedback inline-edit__error"
+  *ngIf="control.hasError('maxlength') && control.touched"
+>
+  This field can't have more characters then
+  {{ control.errors?.maxlength?.requiredLength }}!
+</span>
+<span
+  class="error-feedback inline-edit__error"
+  *ngIf="control.hasError('minlength') && control.touched"
+>
+  This field can't have less characters then
+  {{ control.errors?.minlength?.requiredLength }}!
+</span>

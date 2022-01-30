@@ -1,0 +1,30 @@
+<div class="comments">
+  <div *ngFor="let comment of comments">
+    <app-comment-item
+      [comment]="comment"
+      [control]="commentsForm.get(comment._id)"
+      (updateComment)="updateComment($event)"
+      (removeComment)="removeComment($event)"
+    ></app-comment-item>
+  </div>
+  <h5 class="comments__subtitle">Write a new comment</h5>
+  <hr class="comments__subtitle-divider" />
+  <form novalidate (ngSubmit)="createComment()" [formGroup]="ticketForm">
+    <div class="form-group">
+      <textarea
+        formControlName="comment"
+        rows="10"
+        placeholder="Write something... You can use markdown ;)"
+      ></textarea>
+    </div>
+    <div class="form-group comments__button-wrapper">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="ticketForm.invalid || (loading$ | async)"
+      >
+        Send
+      </button>
+    </div>
+  </form>
+</div>

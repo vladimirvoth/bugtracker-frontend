@@ -1,0 +1,115 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create a new ticket!</h4>
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="bsModalRef.hide()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form
+    class="ticket-form"
+    novalidate
+    (ngSubmit)="onSubmit()"
+    [formGroup]="ticketForm"
+  >
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        required
+        formControlName="title"
+        placeholder="Enter the ticket title here..."
+      />
+      <span
+        class="error-feedback"
+        *ngIf="
+          ticketForm.get('title').hasError('required') &&
+          ticketForm.get('title').touched
+        "
+      >
+        Title is required!
+      </span>
+    </div>
+    <div class="form-group">
+      <select
+        class="form-select ticket-form__select"
+        (change)="changeSelect($event, 'type')"
+        formControlName="type"
+      >
+        <option value="" disabled>Choose a type</option>
+        <option *ngFor="let type of types" [value]="type.key">
+          {{ type.value }}
+        </option>
+      </select>
+      <span
+        class="error-feedback"
+        *ngIf="
+          ticketForm.get('type').hasError('required') &&
+          ticketForm.get('type').touched
+        "
+      >
+        Type is required!
+      </span>
+      <span
+        class="error-feedback"
+        *ngIf="
+          ticketForm.get('type').hasError('maxlength') &&
+          ticketForm.get('type').touched
+        "
+      >
+        This field can't have more characters then
+        {{ control.errors?.maxlength?.requiredLength }}!
+      </span>
+    </div>
+    <div class="form-group">
+      <select
+        class="form-select ticket-form__select"
+        (change)="changeSelect($event, 'priority')"
+        formControlName="priority"
+      >
+        <option value="" disabled>Choose a priority</option>
+        <option *ngFor="let priority of priorities" [value]="priority.key">
+          {{ priority.value }}
+        </option>
+      </select>
+      <span
+        class="error-feedback"
+        *ngIf="
+          ticketForm.get('priority').hasError('required') &&
+          ticketForm.get('priority').touched
+        "
+      >
+        Priority is required!
+      </span>
+    </div>
+    <div class="form-group">
+      <textarea
+        formControlName="description"
+        rows="10"
+        placeholder="Write something... You can use markdown ;)"
+      ></textarea>
+      <span
+        class="error-feedback"
+        *ngIf="
+          ticketForm.get('description').hasError('required') &&
+          ticketForm.get('description').touched
+        "
+      >
+        Description is required!
+      </span>
+    </div>
+    <div class="form-group ticket-form__button-wrapper">
+      <button
+        type="submit"
+        class="btn btn-primary ticket-form__button"
+        [disabled]="ticketForm.invalid || (loading$ | async)"
+      >
+        Create Ticket
+      </button>
+    </div>
+  </form>
+</div>

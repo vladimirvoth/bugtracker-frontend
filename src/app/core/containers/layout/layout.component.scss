@@ -1,0 +1,29 @@
+@import '../../../../styles/globals/vars.scss';
+
+:host {
+  display: block;
+
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      'sidenav main'
+      'sidenav footer';
+
+    grid-template-columns: 80px auto;
+    grid-template-rows: auto 48px;
+    min-height: 100vh;
+  }
+
+  .sidebar-wrapper {
+    grid-area: sidenav;
+  }
+
+  .main-content-wrapper {
+    grid-area: main;
+    padding: 8px;
+  }
+
+  .footer-wrapper {
+    grid-area: footer;
+  }
+}
